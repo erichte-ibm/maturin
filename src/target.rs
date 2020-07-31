@@ -73,6 +73,7 @@ enum Arch {
     ARMV7L,
     X86,
     X86_64,
+    POWERPC64,
 }
 
 impl fmt::Display for Arch {
@@ -82,6 +83,7 @@ impl fmt::Display for Arch {
             Arch::ARMV7L => write!(f, "armv7l"),
             Arch::X86 => write!(f, "i686"),
             Arch::X86_64 => write!(f, "x86_64"),
+            Arch::POWERPC64 => write!(f, "ppc64le")
         }
     }
 }
@@ -120,6 +122,7 @@ impl Target {
             platforms::target::Arch::X86 => Arch::X86,
             platforms::target::Arch::ARM => Arch::ARMV7L,
             platforms::target::Arch::AARCH64 => Arch::AARCH64,
+            platforms::target::Arch::POWERPC64 => Arch::POWERPC64,
             unsupported => bail!("The architecture {:?} is not supported", unsupported),
         };
 
@@ -151,6 +154,7 @@ impl Target {
             Arch::ARMV7L => 32,
             Arch::X86 => 32,
             Arch::X86_64 => 64,
+            Arch::POWERPC64 => 64,
         }
     }
 
@@ -211,6 +215,7 @@ impl Target {
             (OS::Linux, Arch::ARMV7L) => "arm-linux-gnueabihf",
             (OS::Linux, Arch::X86) => "i386-linux-gnu", // not i686
             (OS::Linux, Arch::X86_64) => "x86_64-linux-gnu",
+            (OS::Linux, Arch::POWERPC64) => "ppc64le-linux-gnu",
             (OS::Macos, Arch::X86_64) => "darwin",
             (OS::Windows, Arch::X86) => "win32",
             (OS::Windows, Arch::X86_64) => "win_amd64",
