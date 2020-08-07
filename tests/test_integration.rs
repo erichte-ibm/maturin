@@ -55,6 +55,7 @@ fn test_integration(package: impl AsRef<Path>, bindings: Option<String>) -> Resu
     // The first argument is ignored by clap
     let mut cli = vec![
         "build",
+        "--manylinux=off",
         "--manifest-path",
         &package_string,
         "--cargo-extra-args='--quiet'",
